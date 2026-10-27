@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>go · 示例</title>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0 auto; max-width: 860px; padding: 24px; }
+        h3 { margin-top: 0; }
+        h4 { margin: 22px 0 8px; color: #57606a; font-size: 14px; }
+        pre { background: #f6f8fa; padding: 14px; border-radius: 6px; line-height: 1.6; }
+        a { color: #1e50b3; }
+    </style>
+</head>
+<body>
+    <h3>go · 示例</h3>
+    <p>覆盖：函数、关键字、字符串（含原始字符串），以及结构体、接口、channel、goroutine 等更多情况。</p>
+
+    <h4>基础用法</h4>
+    <pre tag="go">// Go 单行注释
+/* 块注释 */
+package main
+
+import "fmt"
+
+func greet(name string) string {
+    return `hi, ` + name
+}
+
+func main() {
+    fmt.Println(greet("world"))
+}</pre>
+
+    <h4>更多情况</h4>
+    <pre tag="go">package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+type Greeter interface {
+    Greet(name string) string
+}
+
+type Person struct {
+    Name string
+    Age  int
+}
+
+func (p *Person) Greet(name string) string {
+    return "hi, " + name
+}
+
+func main() {
+    nums := []int{1, 2, 3}
+    m := map[string]int{"a": 1}
+    ch := make(chan int)
+
+    go func() {
+        ch &lt;- len(nums)
+    }()
+
+    count := &lt;-ch
+    raw := `multi
+line raw`
+
+    if count &gt; 0 &amp;&amp; m["a"] == 1 {
+        p := &amp;Person{Name: "tom", Age: 20}
+        fmt.Println(strings.ToUpper(p.Greet("world")), raw)
+    }
+}</pre>
+
+    <p><a href="./index.html">← 返回示例入口</a></p>
+
+    <script src="../../dist/shader.js"></script>
+    <script>
+        Shader.shader();
+    </script>
+</body>
+</html>

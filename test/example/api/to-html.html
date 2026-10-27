@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>API · toHTML</title>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 24px; color: #24292f; }
+        h3 { margin-top: 0; }
+        .pane { background: #f6f8fa; padding: 14px; border-radius: 6px; line-height: 1.6; margin: 10px 0; }
+        .label { font-size: 12px; color: #57606a; margin: 16px 0 4px; }
+        textarea { width: 100%; box-sizing: border-box; font-family: monospace; font-size: 13px; padding: 8px; border: 1px solid #d0d7de; border-radius: 6px; height: 90px; }
+        button { margin-top: 8px; padding: 6px 14px; border: 1px solid #1e50b3; background: #1e50b3; color: #fff; border-radius: 6px; cursor: pointer; font-size: 13px; }
+        a { color: #1e50b3; }
+    </style>
+</head>
+<body>
+    <h3>Shader.toHTML(langId, source, colors?)</h3>
+    <p>直接产出带颜色的 HTML 字符串（每个 token 包一层 <code>&lt;span style="color:..."&gt;</code>）。</p>
+
+    <div class="label">输入源码（可编辑）</div>
+    <textarea id="input">/* CSS 示例 */
+.box { color: #ff0000; background: url("./bg.png"); }</textarea>
+    <div>
+        <button id="run">toHTML 渲染</button>
+    </div>
+
+    <div class="label">渲染结果</div>
+    <div class="pane" id="rendered"></div>
+
+    <div class="label">生成的 HTML 源码（前 300 字符）</div>
+    <div class="pane"><code id="raw"></code></div>
+
+    <p><a href="../index.html">← 返回示例入口</a></p>
+
+    <script src="../../../dist/shader.js"></script>
+    <script>
+        function run() {
+            const src = document.getElementById("input").value;
+            const html = Shader.toHTML("css", src);
+            document.getElementById("rendered").innerHTML = html;
+            document.getElementById("raw").textContent = html.slice(0, 300);
+        }
+        document.getElementById("run").addEventListener("click", run);
+        run();
+    </script>
+</body>
+</html>

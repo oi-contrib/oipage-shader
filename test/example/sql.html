@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>sql · 示例</title>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0 auto; max-width: 860px; padding: 24px; }
+        h3 { margin-top: 0; }
+        h4 { margin: 22px 0 8px; color: #57606a; font-size: 14px; }
+        pre { background: #f6f8fa; padding: 14px; border-radius: 6px; line-height: 1.6; }
+        a { color: #1e50b3; }
+    </style>
+</head>
+<body>
+    <h3>sql · 示例</h3>
+    <p>覆盖：关键字、函数、字符串、数字，以及建表、连接、子查询、聚合、分组等更多情况。</p>
+
+    <h4>基础用法</h4>
+    <pre tag="sql">-- SQL 注释
+/* 多行注释 */
+SELECT id, name, COUNT(*) AS total
+FROM users
+WHERE status = 'active'
+GROUP BY id
+ORDER BY id DESC
+LIMIT 10;</pre>
+
+    <h4>更多情况</h4>
+    <pre tag="sql">CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(64) NOT NULL,
+    status VARCHAR(16),
+    created_at DATETIME
+);
+
+CREATE UNIQUE INDEX idx_users_name ON users (name);
+
+INSERT INTO users (name, status, created_at) VALUES ('tom', 'active', NOW());
+
+UPDATE users SET status = 'inactive' WHERE id = 1;
+DELETE FROM users WHERE status = 'deleted';
+
+SELECT
+    u.id,
+    u.name,
+    COUNT(o.id) AS order_count,
+    SUM(o.amount) AS total,
+    CASE WHEN SUM(o.amount) > 1000 THEN 'vip' ELSE 'normal' END AS level
+FROM users AS u
+LEFT JOIN orders AS o ON o.user_id = u.id
+WHERE u.status = 'active'
+  AND u.created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+GROUP BY u.id, u.name
+HAVING COUNT(o.id) > 0
+ORDER BY total DESC
+LIMIT 10 OFFSET 0;</pre>
+
+    <p><a href="./index.html">← 返回示例入口</a></p>
+
+    <script src="../../dist/shader.js"></script>
+    <script>
+        Shader.shader();
+    </script>
+</body>
+</html>

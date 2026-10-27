@@ -1,0 +1,6 @@
+{
+    "name": "oipage",
+    "version": 1,
+    "flags": [true, false, null],
+    "extra": "with \"escape\" and \\path"
+}

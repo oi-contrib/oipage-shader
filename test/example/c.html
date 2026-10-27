@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>c · 示例</title>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0 auto; max-width: 860px; padding: 24px; }
+        h3 { margin-top: 0; }
+        h4 { margin: 22px 0 8px; color: #57606a; font-size: 14px; }
+        pre { background: #f6f8fa; padding: 14px; border-radius: 6px; line-height: 1.6; }
+        a { color: #1e50b3; }
+    </style>
+</head>
+<body>
+    <h3>c · 示例</h3>
+    <p>覆盖：函数、注释、字符串，以及宏、指针、结构体、位运算等更多情况。</p>
+
+    <h4>基础用法</h4>
+    <pre tag="c">/* C 注释 */
+#include &lt;stdio.h&gt;
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int main(void) {
+    printf("result = %d\n", add(1, 2));
+    return 0;
+}</pre>
+
+    <h4>更多情况</h4>
+    <pre tag="c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))
+#define BUFFER_SIZE 256
+
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+static int sum(const int *arr, int len) {
+    int total = 0;
+    for (int i = 0; i &lt; len; i++) {
+        total += arr[i];
+    }
+    return total;
+}
+
+int main(void) {
+    int nums[] = {1, 2, 3, 4};
+    Node *head = NULL;
+    unsigned flags = 0x0F &amp; 0x03;
+    int ok = (flags != 0) &amp;&amp; !0;
+
+    switch (ok) {
+        case 1:
+            printf("sum = %d\n", sum(nums, 4));
+            break;
+        default:
+            fprintf(stderr, "none\n");
+    }
+    return 0;
+}</pre>
+
+    <p><a href="./index.html">← 返回示例入口</a></p>
+
+    <script src="../../dist/shader.js"></script>
+    <script>
+        Shader.shader();
+    </script>
+</body>
+</html>

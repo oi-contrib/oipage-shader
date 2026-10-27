@@ -1,0 +1,50 @@
+{
+  "name": "@oipage/shader",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "一个简单小巧的代码着色库",
+  "main": "./dist/shader.min.js",
+  "module": "./src/index.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.js",
+      "require": "./dist/shader.min.js"
+    }
+  },
+  "typings": "./types/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "types",
+    "README.md",
+    "docs",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "npm install && npm run dev",
+    "dev": "rollup --config ./rollup.config.js -w",
+    "build": "rollup --config ./rollup.config.js && terser ./dist/shader.js --compress --mangle --output ./dist/shader.min.js",
+    "test": "node test/unit/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oi-contrib/oipage-shader.git"
+  },
+  "author": {
+    "name": "zxl20070701",
+    "url": "https://zxl20070701.github.io/notebook/home.html"
+  },
+  "keywords": [
+    "oipage",
+    "shader",
+    "javascript"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@oipage/testjs": "^0.1.1",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "rollup": "^4.6.1",
+    "terser": "^5.17.1"
+  }
+}

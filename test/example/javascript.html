@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript · 示例</title>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0 auto; max-width: 860px; padding: 24px; }
+        h3 { margin-top: 0; }
+        h4 { margin: 22px 0 8px; color: #57606a; font-size: 14px; }
+        pre { background: #f6f8fa; padding: 14px; border-radius: 6px; line-height: 1.6; }
+        a { color: #1e50b3; }
+    </style>
+</head>
+<body>
+    <h3>javascript · 示例</h3>
+    <p>覆盖：关键字、函数、字符串/模板字符串、注释，以及类、async、生成器、正则等更多情况。</p>
+
+    <h4>基础用法</h4>
+    <pre tag="javascript">// 单行注释
+/* 块注释 */
+function add (a, b) {
+    const msg = "hello, \"world\"";
+    return a + b;
+}
+
+add(1, 2);
+const tpl = `tag ${1 + 2}`;</pre>
+
+    <h4>更多情况</h4>
+    <pre tag="javascript">class Animal {
+    constructor (name) {
+        this.name = name;
+    }
+    get title () {
+        return "[" + this.name + "]";
+    }
+    static create (name) {
+        return new Animal(name);
+    }
+}
+
+class Dog extends Animal {
+    async run (speed = 10) {
+        const parts = ["a", "b", "c"];
+        const [first, ...rest] = parts;
+        const msg = `dog ${this.name} runs at ${speed}`;
+        const s = "he said \"hi\" and \\ backslash";
+        const re = /ab+c/gi;
+        const val = this?.info?.age ?? 0;
+        await Promise.resolve();
+        return { first, rest, msg, s, re, val };
+    }
+    *gen () {
+        yield 1;
+        yield* [2, 3];
+    }
+}
+
+const fn = (a, b) => a + b;
+fn(1, 2);</pre>
+
+    <p><a href="./index.html">← 返回示例入口</a></p>
+
+    <script src="../../dist/shader.js"></script>
+    <script>
+        Shader.shader();
+    </script>
+</body>
+</html>

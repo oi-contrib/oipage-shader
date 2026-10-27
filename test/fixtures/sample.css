@@ -1,0 +1,10 @@
+/* CSS 注释 */
+.box {
+    color: #ff0000;
+    font-size: 13px;
+    background: url("./bg.png");
+}
+
+.box:hover {
+    color: rgba(0, 0, 0, 0.5);
+}

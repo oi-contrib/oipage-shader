@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>API · tokenize</title>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 24px; color: #24292f; }
+        h3 { margin-top: 0; }
+        pre { background: #f6f8fa; padding: 14px; border-radius: 6px; line-height: 1.6; }
+        table { border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+        th, td { border: 1px solid #eaeef2; padding: 6px 10px; text-align: left; }
+        th { background: #f6f8fa; }
+        .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; border: 1px solid rgba(0,0,0,.1); }
+        a { color: #1e50b3; }
+    </style>
+</head>
+<body>
+    <h3>Shader.tokenize(langId, source, colors?)</h3>
+    <p>把源码编译为 <code>{ color, content }[]</code> token 数组，便于自定义渲染。</p>
+
+    <pre>const tokens = Shader.tokenize("javascript", "const a = 1; // 注释");</pre>
+
+    <p>源码：</p>
+    <pre tag="javascript" id="source">const a = 1; // 注释
+function add (x, y) { return x + y; }</pre>
+
+    <p>tokenize 结果：</p>
+    <table id="result">
+        <thead><tr><th>#</th><th>color</th><th>content</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <p><a href="../index.html">← 返回示例入口</a></p>
+
+    <script src="../../../dist/shader.js"></script>
+    <script>
+        // 先对源码本身着色，展示原始代码
+        Shader.shader(document.getElementById("source"));
+
+        // 再演示 tokenize 的输出结构
+        const src = "const a = 1; // 注释\nfunction add (x, y) { return x + y; }";
+        const tokens = Shader.tokenize("javascript", src);
+        const tbody = document.querySelector("#result tbody");
+        tokens.forEach((t, i) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML =
+                "<td>" + i + "</td>" +
+                '<td><span class="swatch" style="background:' + t.color + '"></span>' + t.color + "</td>" +
+                "<td>" + t.content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</td>";
+            tbody.appendChild(tr);
+        });
+    </script>
+</body>
+</html>
